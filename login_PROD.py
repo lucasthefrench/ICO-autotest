@@ -91,7 +91,7 @@ class FirstTest(unittest.TestCase):
         self.driver.find_element_by_id("domain").send_keys(args.myDomain)
         self.driver.find_element_by_css_selector("button.login-button").click()
         time.sleep(30)
-        self.driver.find_element_by_id("self-service_")
+        self.driver.find_element_by_id("self-service")
         FILE_PATH = screenshot_path + '\\dashboard_evidence_'+args.myDomain+'.png'
         self.driver.save_screenshot(FILE_PATH)
 if __name__ == '__main__':
