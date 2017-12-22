@@ -10,6 +10,7 @@ from selenium.common.exceptions import NoAlertPresentException
 from selenium.webdriver.chrome.options import Options
 import unittest, time, re
 import HtmlTestRunner
+import argparse
 
 # *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- 
 # Argument Parser for command line option generation
