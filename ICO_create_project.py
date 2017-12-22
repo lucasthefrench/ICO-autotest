@@ -29,7 +29,7 @@ parser.add_argument('-myEMAIL_PASSWORD','--myEMAIL_PASSWORD',help='Test PassAXA 
 parser.add_argument('-myDomain','--myDomain',help='Test ICO portal specific domain',action='store',)
 parser.add_argument('-mySubscription','--mySubscription',help='Test ICO portal specific domain',action='store',)
 parser.add_argument('-myProjectName','--myProjectName',help='Test ICO portal specific domain',action='store',)
-parser.add_argument('-myProjectDescripiton','--myProjectDescripiton',help='Test ICO portal specific domain',action='store',)
+parser.add_argument('-myProjectDescripiton','--myProjectDescription',help='Test ICO portal specific domain',action='store',)
 parser.add_argument('-myProjectOwner','--myProjectOwner',help='Test ICO portal specific domain',action='store',)
 
 # *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- 
