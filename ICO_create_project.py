@@ -101,6 +101,7 @@ class FirstTest(unittest.TestCase):
         self.driver.find_element_by_id("self-service").click()
         self.driver.find_element_by_css_selector("div.offering-desc").click()
         self.driver.find_element_by_xpath("//a[3]/div").click()
+        time.sleep(10)
         # ---------select a subscription----------------------------------------------------------------------------------------------------------------------------------------------
         self.driver.find_element_by_id("dijit_form_FilteringSelect_0").send_keys(args.mySubscription)
         time.sleep(2)
