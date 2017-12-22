@@ -116,8 +116,8 @@ class FirstTest(unittest.TestCase):
         time.sleep(20)
         # ---------store project name and take screenshot----------------------------------------------------------------------------------------------------------------------------------------------
         project_name = driver.find_element_by_css_selector("span.text").text
-	    FILE_PATH = screenshot_path + '\\summary_evidence_'+project_name+'.png'
-	    self.driver.save_screenshot(FILE_PATH)
+        FILE_PATH = screenshot_path + '\\summary_evidence_'+project_name+'.png'
+        self.driver.save_screenshot(FILE_PATH)
         # ---------submit----------------------------------------------------------------------------------------------------------------------------------------------
         driver.find_element_by_css_selector("#div_4_1_2 > button.BPMButton.BPMButtonBorder").click()
 if __name__ == '__main__':
