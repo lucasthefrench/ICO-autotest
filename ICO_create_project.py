@@ -122,5 +122,6 @@ class FirstTest(unittest.TestCase):
         self.driver.save_screenshot(FILE_PATH)
         # ---------submit----------------------------------------------------------------------------------------------------------------------------------------------
         self.driver.find_element_by_css_selector("#div_4_1_2 > button.BPMButton.BPMButtonBorder").click()
+        time.sleep(5)
 if __name__ == '__main__':
     unittest.main(argv=[sys.argv[0]],testRunner=HtmlTestRunner.HTMLTestRunner(output='c:\\Users\\Administrator\\Documents\\python_scripts\\Demo_automation_tests'))
