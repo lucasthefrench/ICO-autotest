@@ -98,27 +98,27 @@ class FirstTest(unittest.TestCase):
         # |||||||||||||||---CREATE NEW PROJECT---|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
         # ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
         # ---------access the right offering----------------------------------------------------------------------------------------------------------------------------------------------
-        driver.find_element_by_id("self-service").click()
-        driver.find_element_by_css_selector("div.offering-desc").click()
-        driver.find_element_by_xpath("//a[3]/div").click()
+        self.driver.find_element_by_id("self-service").click()
+        self.driver.find_element_by_css_selector("div.offering-desc").click()
+        self.driver.find_element_by_xpath("//a[3]/div").click()
         # ---------select a subscription----------------------------------------------------------------------------------------------------------------------------------------------
-        driver.find_element_by_id("dijit_form_FilteringSelect_0").send_keys(args.mySubscription)
-        driver.find_element_by_id("dijit_form_FilteringSelect_0_popup0").click()
+        self.driver.find_element_by_id("dijit_form_FilteringSelect_0").send_keys(args.mySubscription)
+        self.driver.find_element_by_id("dijit_form_FilteringSelect_0_popup0").click()
         # ---------set project name----------------------------------------------------------------------------------------------------------------------------------------------
-        driver.find_element_by_id("dijit_form_ComboBox_0").send_keys(args.myProjectName)
+        self.driver.find_element_by_id("dijit_form_ComboBox_0").send_keys(args.myProjectName)
         # ---------set project description----------------------------------------------------------------------------------------------------------------------------------------------
-        driver.find_element_by_id("dijit_form_Textarea_0").send_keys(args.myProjectDescripiton)
+        self.driver.find_element_by_id("dijit_form_Textarea_0").send_keys(args.myProjectDescripiton)
         # ---------select project owner----------------------------------------------------------------------------------------------------------------------------------------------
-        driver.find_element_by_id("dijit_form_FilteringSelect_1").send_keys(args.myProjectOwner)
-        driver.find_element_by_id("dijit_form_FilteringSelect_1_popup0").click()
+        self.driver.find_element_by_id("dijit_form_FilteringSelect_1").send_keys(args.myProjectOwner)
+        self.driver.find_element_by_id("dijit_form_FilteringSelect_1_popup0").click()
         # ---------next----------------------------------------------------------------------------------------------------------------------------------------------
-        driver.find_element_by_css_selector("button.BPMButton.BPMButtonBorder").click()
+        self.driver.find_element_by_css_selector("button.BPMButton.BPMButtonBorder").click()
         time.sleep(20)
         # ---------store project name and take screenshot----------------------------------------------------------------------------------------------------------------------------------------------
-        project_name = driver.find_element_by_css_selector("span.text").text
+        project_name = self.driver.find_element_by_css_selector("span.text").text
         FILE_PATH = screenshot_path + '\\summary_evidence_'+project_name+'.png'
         self.driver.save_screenshot(FILE_PATH)
         # ---------submit----------------------------------------------------------------------------------------------------------------------------------------------
-        driver.find_element_by_css_selector("#div_4_1_2 > button.BPMButton.BPMButtonBorder").click()
+        self.driver.find_element_by_css_selector("#div_4_1_2 > button.BPMButton.BPMButtonBorder").click()
 if __name__ == '__main__':
     unittest.main(argv=[sys.argv[0]],testRunner=HtmlTestRunner.HTMLTestRunner(output='c:\\Users\\Administrator\\Documents\\python_scripts\\Demo_automation_tests'))
