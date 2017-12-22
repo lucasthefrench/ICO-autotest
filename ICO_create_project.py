@@ -103,6 +103,7 @@ class FirstTest(unittest.TestCase):
         self.driver.find_element_by_xpath("//a[3]/div").click()
         # ---------select a subscription----------------------------------------------------------------------------------------------------------------------------------------------
         self.driver.find_element_by_id("dijit_form_FilteringSelect_0").send_keys(args.mySubscription)
+        time.sleep(2)
         self.driver.find_element_by_id("dijit_form_FilteringSelect_0_popup0").click()
         # ---------set project name----------------------------------------------------------------------------------------------------------------------------------------------
         self.driver.find_element_by_id("dijit_form_ComboBox_0").send_keys(args.myProjectName)
@@ -110,6 +111,7 @@ class FirstTest(unittest.TestCase):
         self.driver.find_element_by_id("dijit_form_Textarea_0").send_keys(args.myProjectDescripiton)
         # ---------select project owner----------------------------------------------------------------------------------------------------------------------------------------------
         self.driver.find_element_by_id("dijit_form_FilteringSelect_1").send_keys(args.myProjectOwner)
+        time.sleep(2)
         self.driver.find_element_by_id("dijit_form_FilteringSelect_1_popup0").click()
         # ---------next----------------------------------------------------------------------------------------------------------------------------------------------
         self.driver.find_element_by_css_selector("button.BPMButton.BPMButtonBorder").click()
