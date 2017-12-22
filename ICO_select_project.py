@@ -8,7 +8,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 from selenium.webdriver.chrome.options import Options
-import unittest, time, re
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+import unittest, time, re, urllib, sys
 import HtmlTestRunner
 import argparse
 
