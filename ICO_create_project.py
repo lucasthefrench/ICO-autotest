@@ -108,16 +108,20 @@ class FirstTest(unittest.TestCase):
         time.sleep(2)
         self.driver.find_element_by_id("dijit_form_FilteringSelect_0_popup0").click()
         # ---------set project name----------------------------------------------------------------------------------------------------------------------------------------------
+        time.sleep(2)        
         self.driver.find_element_by_id("dijit_form_ComboBox_0").send_keys(args.myProjectName)
         # ---------set project description----------------------------------------------------------------------------------------------------------------------------------------------
+        time.sleep(2)
         self.driver.find_element_by_id("dijit_form_Textarea_0").send_keys(args.myProjectDescription)
         # ---------select project owner----------------------------------------------------------------------------------------------------------------------------------------------
+        time.sleep(2)        
         self.driver.find_element_by_id("dijit_form_FilteringSelect_1").send_keys(args.myProjectOwner)
         time.sleep(2)
         self.driver.find_element_by_id("dijit_form_FilteringSelect_1_popup0").click()
         # ---------next----------------------------------------------------------------------------------------------------------------------------------------------
+        time.sleep(2)        
         self.driver.find_element_by_css_selector("button.BPMButton.BPMButtonBorder").click()
-        time.sleep(20)
+        time.sleep(30)
         # ---------store project name and take screenshot----------------------------------------------------------------------------------------------------------------------------------------------
         project_name = self.driver.find_element_by_css_selector("span.text").text
         FILE_PATH = screenshot_path + '\\summary_evidence_'+project_name+'.png'
