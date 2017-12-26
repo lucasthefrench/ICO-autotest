@@ -110,7 +110,7 @@ class FirstTest(unittest.TestCase):
         # ---------set project name----------------------------------------------------------------------------------------------------------------------------------------------
         self.driver.find_element_by_id("dijit_form_ComboBox_0").send_keys(args.myProjectName)
         # ---------set project description----------------------------------------------------------------------------------------------------------------------------------------------
-        self.driver.find_element_by_id("dijit_form_Textarea_0").send_keys(args.myProjectDescripiton)
+        self.driver.find_element_by_id("dijit_form_Textarea_0").send_keys(args.myProjectDescripition)
         # ---------select project owner----------------------------------------------------------------------------------------------------------------------------------------------
         self.driver.find_element_by_id("dijit_form_FilteringSelect_1").send_keys(args.myProjectOwner)
         time.sleep(2)
