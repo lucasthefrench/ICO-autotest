@@ -103,6 +103,7 @@ class FirstTest(unittest.TestCase):
         self.driver.find_element_by_xpath("//a[3]/div").click()
         time.sleep(10)
         # ---------select a subscription----------------------------------------------------------------------------------------------------------------------------------------------
+        self.driver.switch_to.frame(self.driver.find_element_by_class_name("coach-iframe")) 
         self.driver.find_element_by_id("dijit_form_FilteringSelect_0").send_keys(args.mySubscription)
         time.sleep(2)
         self.driver.find_element_by_id("dijit_form_FilteringSelect_0_popup0").click()
