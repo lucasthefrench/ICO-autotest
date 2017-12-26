@@ -29,7 +29,7 @@ parser.add_argument('-myEMAIL_PASSWORD','--myEMAIL_PASSWORD',help='Test PassAXA 
 parser.add_argument('-myDomain','--myDomain',help='Test ICO portal specific domain',action='store',)
 parser.add_argument('-mySubscription','--mySubscription',help='Test ICO portal specific domain',action='store',)
 parser.add_argument('-myProjectName','--myProjectName',help='Test ICO portal specific domain',action='store',)
-parser.add_argument('-myProjectDescripiton','--myProjectDescription',help='Test ICO portal specific domain',action='store',)
+parser.add_argument('-myProjectDescription','--myProjectDescription',help='Test ICO portal specific domain',action='store',)
 parser.add_argument('-myProjectOwner','--myProjectOwner',help='Test ICO portal specific domain',action='store',)
 
 # *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- 
@@ -110,7 +110,7 @@ class FirstTest(unittest.TestCase):
         # ---------set project name----------------------------------------------------------------------------------------------------------------------------------------------
         self.driver.find_element_by_id("dijit_form_ComboBox_0").send_keys(args.myProjectName)
         # ---------set project description----------------------------------------------------------------------------------------------------------------------------------------------
-        self.driver.find_element_by_id("dijit_form_Textarea_0").send_keys(args.myProjectDescripition)
+        self.driver.find_element_by_id("dijit_form_Textarea_0").send_keys(args.myProjectDescription)
         # ---------select project owner----------------------------------------------------------------------------------------------------------------------------------------------
         self.driver.find_element_by_id("dijit_form_FilteringSelect_1").send_keys(args.myProjectOwner)
         time.sleep(2)
