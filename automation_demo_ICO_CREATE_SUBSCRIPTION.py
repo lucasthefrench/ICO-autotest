@@ -10,7 +10,7 @@ from selenium.common.exceptions import NoAlertPresentException
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-import unittest, time, re, urllib, sys
+import unittest, time, re, urllib, sys, datetime
 import HtmlTestRunner
 import argparse
 
@@ -71,18 +71,26 @@ class CreateSubscription(unittest.TestCase):
 
     def tearDown(self):
         # close the browser window
+        screenshot_path = "c:\\Users\\Administrator\\Documents\\python_scripts\\Demo_automation_tests\\test_results"
+        now = datetime.datetime.now()
+        today = now.strftime("%B-%d-%Y_%I-%M%p")
+        if not self.driver.find_element_by_css_selector("span.text").text:
+            self.driver.save_screenshot(screenshot_path+'\\FAILURE_EVIDENCE_CREATESUBSCRIPTION_'+today+'.png')
         self.driver.quit()
-	    
-    def test_create_subscription(self):
+
+    def test_CREATE_SUBSCRIPTION(self):
         # ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-        screenshot_path = "c:\\Users\\Administrator\\Documents\\python_scripts\\Demo_automation_tests"
-        date = "22122017"
+        now = datetime.datetime.now()
+        today = now.strftime("%B-%d-%Y_%I-%M%p")
+        wait = WebDriverWait(self.driver, 70)
+		# ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
         # ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
         # |||||||||||||||---LOG IN TO THE PORTAL---|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
         # ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
         self.driver.get(args.myFQDN)
         self.driver.maximize_window()
-        time.sleep(5)
+        time.sleep(0.5)
         self.driver.find_element_by_id("username").clear()
         self.driver.find_element_by_id("username").send_keys(args.myEMAIL_ADDRESS)
         self.driver.find_element_by_id("password").clear()
@@ -90,7 +98,8 @@ class CreateSubscription(unittest.TestCase):
         self.driver.find_element_by_id("domain").clear()
         self.driver.find_element_by_id("domain").send_keys(args.myDomain)
         self.driver.find_element_by_css_selector("button.login-button").click()
-        time.sleep(30)
+        element = wait.until(EC.element_to_be_clickable((By.ID, 'self-service')))
+
         # ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
         # |||||||||||||||---SELECT THE RIGHT PROJECT---|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
         # ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -98,80 +107,77 @@ class CreateSubscription(unittest.TestCase):
         select = Select(self.driver.find_element_by_id('projectSelect'))
         select.select_by_value("SubscriptionAdministration")
         time.sleep(20)
+
         # ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
         # |||||||||||||||---CREATE NEW SUBSCRIPTION---|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
         # ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-        # ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-        # |||||||||||||||---VARIABLES TO BE DEFINED BY USER---||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-        # ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-        subscription_description = "TO BE DEFINED BY USER"
-        ats_data_center = "SE"
-        opco_legal_entity_name = "AXA TECH FRANCE"
-        currency = "EUR"
-        budget_envelope = "1"
-        budget_code = "code"
-        budget_name = "name"
-        target_environment = "ANTEPROD"
-        subscription_owner = "ico_atfse01-owners"
-        # ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-        # |||||||||||||||---SCRIPT DO NOT MODIFY---|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-        # ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+        screenshot_path = "c:\\Users\\Administrator\\Documents\\python_scripts\\Demo_automation_tests\\test_results"
         # ---------verifying if right project is selected----------------------------------------------------------------------------------------------------------------------------------------------
-        try: self.assertEqual("SubscriptionAdministration", driver.find_element_by_xpath("//span[@id='projectSelectDefault']").text)
+        try: self.assertEqual("SubscriptionAdministration", self.driver.find_element_by_xpath("//span[@id='projectSelectDefault']").text)
         except AssertionError as e: self.verificationErrors.append(str(e))
         # ---------go to the right offering-----------------------------------------------------------------------------------------------------------------------------------------------------------
-        driver.find_element_by_id("self-service").click()
-        time.sleep(5)
-        driver.find_element_by_css_selector("div.content").click()
-        driver.find_element_by_xpath("//a[2]/div/div").click()
-        time.sleep(10)
+        self.driver.find_element_by_id("self-service").click()
+        element = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.content')))
+        #time.sleep(5)
+        self.driver.find_element_by_css_selector("div.content").click()
+        self.driver.find_element_by_xpath("//a[2]/div/div").click()
+        element = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'coach-iframe')))
+        #time.sleep(30)
         # ---------Subscription Description--------------------------------------------------------------------------------------------------------------------------
         self.driver.switch_to.frame(self.driver.find_element_by_class_name("coach-iframe")) 
-        driver.find_element_by_id("dijit_form_Textarea_0").send_keys(args.mySubDescription)
+        self.driver.find_element_by_id("dijit_form_Textarea_0").send_keys(args.mySubDescription)
         # ERROR: Caught exception [ERROR: Unsupported command [clickAt | css=div.breadcrumbcontents | ]]
         # ---------ats data center-------------------------------------------------------------------------------------------------------------------------------------
-        driver.find_element_by_id("dijit_form_FilteringSelect_0").send_keys(args.myAtsDataCenter)
+        self.driver.find_element_by_id("dijit_form_FilteringSelect_0").send_keys(args.myAtsDataCenter)
         time.sleep(3)
-        driver.find_element_by_id("dijit_form_FilteringSelect_0").click('dijit_form_FilteringSelect_0_popup0')
+        self.driver.find_element_by_id("dijit_form_FilteringSelect_0_popup0").click()
+        time.sleep(5)
         # ---------opco legal entity name----------------------------------------------------------------------------------------------------------------------------
-        driver.find_element_by_id("dijit_form_FilteringSelect_1").send_keys(args.myOpcoName)
+        self.driver.find_element_by_id("dijit_form_FilteringSelect_1").send_keys(args.myOpcoName)
         time.sleep(3)
-        driver.find_element_by_id("dijit_form_FilteringSelect_1").click('dijit_form_FilteringSelect_1_popup0')
+        self.driver.find_element_by_id('dijit_form_FilteringSelect_1_popup0').click()
+        time.sleep(3)
         # ---------currency-------------------------------------------------------------------------------------------------------------------------------------------
-        driver.find_element_by_id("dijit_form_FilteringSelect_2").send_keys(args.myCurrency)
+        self.driver.find_element_by_id("dijit_form_FilteringSelect_2").send_keys(args.myCurrency)
         time.sleep(3)
-        driver.find_element_by_id("dijit_form_FilteringSelect_2").click('dijit_form_FilteringSelect_2_popup0')
+        self.driver.find_element_by_id('dijit_form_FilteringSelect_2_popup0').click()
+        time.sleep(3)
         # ---------budget envelope------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         # ERROR: Caught exception [ERROR: Unsupported command [clickAt | id=uniqName_1_0 | ]]
-        driver.find_element_by_id("uniqName_1_0").send_keys(args.myBudgetEnvelope)
+        self.driver.find_element_by_id("uniqName_1_0").send_keys(args.myBudgetEnvelope)
         # ERROR: Caught exception [ERROR: Unsupported command [clickAt | css=div.breadcrumbcontents | ]]
         # ---------budget code-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         # ERROR: Caught exception [ERROR: Unsupported command [clickAt | id=dijit_form_ComboBox_0 | ]]
-        driver.find_element_by_id("dijit_form_ComboBox_0").send_keys(args.myBudgetCode)
+        self.driver.find_element_by_id("dijit_form_ComboBox_0").send_keys(args.myBudgetCode)
         # ERROR: Caught exception [ERROR: Unsupported command [clickAt | css=div.breadcrumbcontents | ]]
         # ---------budget name------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         # ERROR: Caught exception [ERROR: Unsupported command [clickAt | id=dijit_form_ComboBox_1 | ]]
-        driver.find_element_by_id("dijit_form_ComboBox_1").send_keys(args.myBudgetName)
+        self.driver.find_element_by_id("dijit_form_ComboBox_1").send_keys(args.myBudgetName)
         # ERROR: Caught exception [ERROR: Unsupported command [clickAt | css=div.breadcrumbcontents | ]]
         # ---------target environment-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        driver.find_element_by_id("dijit_form_FilteringSelect_3").send_keys(args.myTargetEnv)
+        self.driver.find_element_by_id("dijit_form_FilteringSelect_3").send_keys(args.myTargetEnv)
         time.sleep(3)
-        driver.find_element_by_id("dijit_form_FilteringSelect_3").click('dijit_form_FilteringSelect_3_popup0')
+        self.driver.find_element_by_id('dijit_form_FilteringSelect_3_popup0').click()
+        time.sleep(3)
         # ---------subscription owner--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        driver.find_element_by_id("dijit_form_FilteringSelect_4").send_keys(args.mySubOwner)
+        self.driver.find_element_by_id("dijit_form_FilteringSelect_4").send_keys(args.mySubOwner)
         time.sleep(3)
-        driver.find_element_by_id("dijit_form_FilteringSelect_4").click('dijit_form_FilteringSelect_4_popup0')
+        self.driver.find_element_by_id('dijit_form_FilteringSelect_4_popup0').click()
+        time.sleep(3)
         # ---------go next------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        driver.find_element_by_css_selector("button.BPMButton.BPMButtonBorder").click()
-        time.sleep(10)
+        self.driver.find_element_by_css_selector("button.BPMButton.BPMButtonBorder").click()
+        element = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'span.text')))        
+		#time.sleep(10)
         # ---------store subscription name------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        subscription_name = driver.find_element_by_css_selector("span.text").text
+        subscription_name = self.driver.find_element_by_css_selector("span.text").text
         time.sleep(3)
-        FILE_PATH = screenshot_path + '\\summary_evidence_'+subscription_name+'.png'
+        FILE_PATH = screenshot_path + '\\summary_evidence_'+project_name+'_'+today+'.png'
         self.driver.save_screenshot(FILE_PATH)
+        time.sleep(3)
         # ---------submit----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        driver.find_element_by_css_selector("#div_4_1_2 > button.BPMButton.BPMButtonBorder").click()        
-    
+        self.driver.find_element_by_css_selector("#div_4_1_2 > button.BPMButton.BPMButtonBorder").click()        
+        time.sleep(3)
+
     def is_element_present(self, how, what):
         try: self.driver.find_element(by=how, value=what)
         except NoSuchElementException as e: return False
@@ -193,5 +199,5 @@ class CreateSubscription(unittest.TestCase):
             return alert_text
         finally: self.accept_next_alert = True
 
-if __name__ == "__main__":
-    unittest.main()
+if __name__ == '__main__':
+    unittest.main(argv=[sys.argv[0]],testRunner=HtmlTestRunner.HTMLTestRunner(output='c:\\Users\\Administrator\\Documents\\python_scripts\\Demo_automation_tests\\test_results'))
